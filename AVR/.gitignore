@@ -13,9 +13,6 @@
 # Linker output
 *.map
 
-# Makefile
-/Makefile
-
 # Others
 *.lst
 *.srec
