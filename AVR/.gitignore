@@ -1,0 +1,21 @@
+# gitignore for C programs using avr-libc
+
+# Binary files
+*.bin
+
+# Object files
+*.o
+*.elf
+
+# Intel hexadecimal object files
+*.hex
+
+# Linker output
+*.map
+
+# Makefile
+/Makefile
+
+# Others
+*.lst
+*.srec
