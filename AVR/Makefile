@@ -11,7 +11,7 @@ BAUDRATE       = 57600
 BITCLOCK       = 5
 
 HZ             = 1000000UL
-SERIAL_PORT_BD = 2400
+SERIAL_PORT_BD = 4800
 
 # You should not have to change anything below here.
 

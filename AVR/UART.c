@@ -9,6 +9,8 @@ void uart_init()
 	UCSR0B = _BV(RXEN0) | _BV(TXEN0);
 	// set 8n1 format
 	UCSR0C = _BV(UCSZ00) | _BV(UCSZ01);
+	// RX Complete Interrupt Enable
+	UCSR0B |= _BV(RXCIE0);
 }
 
 // transmit one char

@@ -1,7 +1,7 @@
-#include <avr/io.h>
 #include <stdio.h>
+#include <avr/io.h>
 
-#define BAUD 2400
+#define BAUD 4800
 
 #define UBRR_VALUE ((F_CPU) / 16 / (BAUD)-1)
 
