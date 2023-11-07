@@ -73,11 +73,14 @@ int main()
 	{
 		if (receive_complete)
 		{
-			scanf("%s", secret_key);
-			if (!strcmp(secret_key, "Enter your secret key here"))
+			fgets(secret_key, 50, stdin);
+			if (!strncmp(secret_key, "Enter your secret key here", 24))
+			{
 				is_enabled = true;
+				printf("Secret key is correct. Starting the measurement");
+			}
 			else
-				printf("Secret key is incorrect\r\n");
+				printf("Secret key is incorrect");
 		}
 		if (is_enabled)
 		{
