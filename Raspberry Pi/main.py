@@ -8,13 +8,16 @@ WARNING_TRESHOLD = 300
 ALERT_TRESHOLD = 400
 MEASUREMENT_INTERVAL = 60
 
+
 def logger_init():
-    logging.basicConfig(filename="results.log", format='%(levelname)s:%(asctime)s %(message)s', filemode='a')
+    logging.basicConfig(filename="results.log",
+                        format='%(levelname)s:%(asctime)s %(message)s', filemode='a')
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
     return logger
 
-if __name__=="__main__":
+
+if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--logging', action=argparse.BooleanOptionalAction)
     args = parser.parse_args()
@@ -33,8 +36,8 @@ if __name__=="__main__":
             logging.info("Secret key is correct. Starting the measurement")
         else:
             logging.info("Secret key is incorrect")
-    assert(connection_established==True)
-    
+    assert (connection_established == True)
+
     while True:
         leds.default_leds_setting()
         res = uart.get_measurement_result()
