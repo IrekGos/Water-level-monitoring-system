@@ -22,8 +22,7 @@ def get_measurement_result() -> int:
     received_data = receive_data()
     return int(received_data)
 
-def connect_with_atmega() -> None:
+def connect_with_atmega() -> bool:
     send_data(CONFIG["SECRET_KEY"])
     response = receive_data()
-    assert response == "Secret key is correct. Starting the measurement"
-    print(response)
+    return bool(response)

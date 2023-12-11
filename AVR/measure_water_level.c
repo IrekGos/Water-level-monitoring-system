@@ -77,10 +77,10 @@ int main()
 			if (!strncmp(secret_key, "Enter your secret key here", 24))
 			{
 				is_enabled = true;
-				printf("Secret key is correct. Starting the measurement");
+				printf("1");
 			}
 			else
-				printf("Secret key is incorrect");
+				printf("0");
 		}
 		if (is_enabled)
 		{

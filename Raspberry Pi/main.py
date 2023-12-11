@@ -27,7 +27,13 @@ if __name__=="__main__":
 
     leds.led_init()
 
-    uart.connect_with_atmega()
+    connection_established = uart.connect_with_atmega()
+    if logging_enable:
+        if connection_established:
+            logging.info("Secret key is correct. Starting the measurement")
+        else:
+            logging.info("Secret key is incorrect")
+    assert(connection_established==True)
     
     while True:
         leds.default_leds_setting()
