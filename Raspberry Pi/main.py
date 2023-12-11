@@ -1,12 +1,29 @@
 from time import sleep
 import leds
 import uart
+import logging
+import argparse
 
 WARNING_TRESHOLD = 300
 ALERT_TRESHOLD = 400
 MEASUREMENT_INTERVAL = 60
 
+def logger_init():
+    logging.basicConfig(filename="results.log", format='%(levelname)s:%(asctime)s %(message)s', filemode='a')
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+    return logger
+
 if __name__=="__main__":
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--logging', action=argparse.BooleanOptionalAction)
+    args = parser.parse_args()
+
+    logging_enable = False
+    if args.logging:
+        logging_enable = True
+        logger = logger_init()
+        logger.info("Logging enabled")
 
     leds.led_init()
 
@@ -15,6 +32,8 @@ if __name__=="__main__":
     while True:
         leds.default_leds_setting()
         res = uart.get_measurement_result()
+        if logging_enable:
+            logger.info("Measurement result: %d" % res)
         if res > ALERT_TRESHOLD:
             leds.led_on(leds.RED_LED)
             leds.led_off(leds.GREEN_LED)
