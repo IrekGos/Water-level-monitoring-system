@@ -5,6 +5,7 @@ import leds
 import uart
 from keypad import KeyPad
 from database import CredentialsDB
+from cloud import send_data
 
 WARNING_TRESHOLD = 300
 ALERT_TRESHOLD = 400
@@ -58,13 +59,20 @@ if __name__ == "__main__":
 
     while True:
         leds.default_leds_setting()
-        res = uart.get_measurement_result()
+        result = uart.get_measurement_result()
+        sent_correctly = send_data(result)
         if logging_enable:
-            logger.info("Measurement result: %d" % res)
-        if res > ALERT_TRESHOLD:
+            logger.info("Measurement result: %d" % result)
+            if sent_correctly:
+                logger.info(
+                    "The result sent correclty to the ThingSpeak IoT cloud")
+            else:
+                logger.warning(
+                    "Sending the result to the ThingSpeak IoT cloud failed")
+        if result > ALERT_TRESHOLD:
             leds.led_on(leds.RED_LED)
             leds.led_off(leds.GREEN_LED)
-        elif res > WARNING_TRESHOLD:
+        elif result > WARNING_TRESHOLD:
             leds.led_on(leds.YELLOW_LED)
             leds.led_off(leds.GREEN_LED)
         sleep(MEASUREMENT_INTERVAL)
