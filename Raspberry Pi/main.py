@@ -58,7 +58,6 @@ if __name__ == "__main__":
     assert (connection_established == True)
 
     while True:
-        leds.default_leds_setting()
         result = uart.get_measurement_result()
         sent_correctly = send_data(result)
         if logging_enable:
@@ -69,6 +68,7 @@ if __name__ == "__main__":
             else:
                 logger.warning(
                     "Sending the result to the ThingSpeak IoT cloud failed")
+        leds.default_leds_setting()
         if result > ALERT_TRESHOLD:
             leds.led_on(leds.RED_LED)
             leds.led_off(leds.GREEN_LED)
