@@ -14,7 +14,7 @@ MEASUREMENT_INTERVAL = 60
 
 def logger_init():
     logging.basicConfig(filename="system.log",
-                        format='%(levelname)s:%(asctime)s %(message)s', filemode='a')
+                        format='[%(asctime)s] [%(levelname)s] %(message)s', filemode='a')
     logger = logging.getLogger()
     logger.setLevel(logging.INFO)
     return logger
@@ -29,6 +29,7 @@ if __name__ == "__main__":
     if args.logging:
         logging_enable = True
         logger = logger_init()
+        logger.info("System started")
         logger.info("Logging enabled")
 
     leds.led_init()
@@ -54,7 +55,7 @@ if __name__ == "__main__":
         if connection_established:
             logger.info("Secret key is correct. Starting the measurement")
         else:
-            logger.info("Secret key is incorrect")
+            logger.error("Secret key is incorrect")
     assert (connection_established == True)
 
     while True:
