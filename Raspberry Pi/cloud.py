@@ -7,5 +7,8 @@ def send_data(data: int) -> bool:
     api_key = CONFIG["API_KEY"]
     url = "https://api.thingspeak.com/update.json"
     body = {"api_key": api_key, "field1": data}
-    response = requests.get(url, json=body)
+    try:
+        response = requests.get(url, json=body)
+    except requests.exceptions.ConnectionError:
+        return False
     return response.status_code == 200
