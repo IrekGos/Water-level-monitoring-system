@@ -4,6 +4,8 @@
 #include <avr/sleep.h>
 #include "UART.h"
 
+#define NUMBER_OF_SAMPLES 3
+
 volatile bool receive_complete;
 
 void adc_init()
@@ -38,8 +40,11 @@ uint16_t ADC_measure()
 
 ISR(TIMER1_COMPA_vect)
 {
-	uint16_t adc = ADC_measure();
-	printf("%d", adc);
+	for (int i = 0; i < NUMBER_OF_SAMPLES; i++)
+	{
+		uint16_t adc = ADC_measure();
+		printf("%03d", adc);
+	}
 }
 
 ISR(USART_RX_vect)

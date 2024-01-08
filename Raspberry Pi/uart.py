@@ -4,6 +4,8 @@ from dotenv import dotenv_values
 
 CONFIG = dotenv_values(".env")
 
+NUMBER_OF_SAMPLES = 3
+
 uart = serial.Serial("/dev/ttyS0", 4800)
 
 
@@ -22,8 +24,12 @@ def receive_data() -> str:
 
 
 def get_measurement_result() -> int:
-    received_data = receive_data()
-    return int(received_data)
+    received_string = receive_data()
+    received_data = []
+    for i in range(NUMBER_OF_SAMPLES):
+        received_data.append(int(received_string[i*3:(i+1)*3]))
+    average = sum(received_data) / len(received_data)
+    return int(average)
 
 
 def connect_with_atmega() -> bool:
