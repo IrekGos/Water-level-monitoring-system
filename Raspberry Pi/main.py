@@ -7,8 +7,8 @@ from keypad import KeyPad
 from database import CredentialsDB
 from cloud import send_data
 
-WARNING_TRESHOLD = 300
-ALERT_TRESHOLD = 400
+WARNING_TRESHOLD = 450
+ALERT_TRESHOLD = 500
 MEASUREMENT_INTERVAL = 60
 
 
