@@ -7,8 +7,8 @@ from keypad import KeyPad
 from database import CredentialsDB
 from cloud import send_data
 
-WARNING_TRESHOLD = 450
-ALERT_TRESHOLD = 500
+WARNING_THRESHOLD = 450
+ALERT_THRESHOLD = 500
 MEASUREMENT_INTERVAL = 60
 
 
@@ -70,10 +70,10 @@ if __name__ == "__main__":
                 logger.warning(
                     "Sending the result to the ThingSpeak IoT cloud failed")
         leds.default_leds_setting()
-        if result > ALERT_TRESHOLD:
+        if result > ALERT_THRESHOLD:
             leds.led_on(leds.RED_LED)
             leds.led_off(leds.GREEN_LED)
-        elif result > WARNING_TRESHOLD:
+        elif result > WARNING_THRESHOLD:
             leds.led_on(leds.YELLOW_LED)
             leds.led_off(leds.GREEN_LED)
         sleep(MEASUREMENT_INTERVAL)
